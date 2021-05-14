@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: application-js
+  name: application-js
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: application-js
+  template:
+    metadata:
+      labels:
+        app: application-js
+    spec:
+      containers:
+      - image: application-js:1.0.0
+        name: application-js
+        env:
+        - name: NAME
+          valueFrom:
+            configMapKeyRef:
+              name: application-configmap
+              key: NAME
+
+              
